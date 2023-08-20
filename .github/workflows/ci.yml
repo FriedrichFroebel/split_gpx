@@ -34,7 +34,7 @@ jobs:
           flake8
       - name: black
         run:
-          black --check --diff
+          black --check --diff .
       - name: mypy
         run:
           mypy split_gpx/
