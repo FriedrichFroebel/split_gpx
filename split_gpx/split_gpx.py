@@ -16,7 +16,7 @@ def get_filename_template(source_path: Path, segment_count: int) -> str:
 
 
 def get_name_template(original_name: str | None, segment_count: int) -> str:
-    original_name = original_name or '(empty)'
+    original_name = original_name or "(empty)"
     width = get_int_length(segment_count)
     return f"{{index:0{width}d}} - {original_name}"
 
