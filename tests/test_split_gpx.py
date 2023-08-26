@@ -1,4 +1,7 @@
-import importlib.resources as resources
+try:
+    import importlib.resources as resources
+except ImportError:
+    import importlib_resources as resources
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest import TestCase

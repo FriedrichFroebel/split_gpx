@@ -30,6 +30,7 @@ setuptools.setup(
             "flake8",
             "pep8-naming",
             "mypy",
+            "importlib_resources; python_version<'3.9'",
         ]
     },
     entry_points={
