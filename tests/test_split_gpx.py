@@ -1,7 +1,7 @@
 try:
-    import importlib.resources as resources
+    from importlib.resources import as_file, files as resources_files
 except ImportError:
-    import importlib_resources as resources
+    from importlib_resources import as_file, files as resources_files
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest import TestCase
@@ -56,11 +56,11 @@ class SplitGpxTestCase(TestCase):
         self, directory_name: str, input_file_name: str, max_segment_points: int
     ):
         input_file = (
-            resources.files(f"tests.examples.{directory_name}") / input_file_name
+            resources_files(f"tests.examples.{directory_name}") / input_file_name
         )
         with TemporaryDirectory() as output_directory:
             output_path = Path(output_directory)
-            with resources.as_file(input_file) as input_path:
+            with as_file(input_file) as input_path:
                 split_gpx(
                     source_path=input_path,
                     target_directory=output_path,
@@ -69,13 +69,13 @@ class SplitGpxTestCase(TestCase):
             output_file_names = {entry.name for entry in output_path.glob("*")}
             expected_file_names = {
                 entry.name
-                for entry in resources.files(
+                for entry in resources_files(
                     f"tests.examples.{directory_name}"
                 ).iterdir()
             } - {input_file_name}
             self.assertEqual(expected_file_names, output_file_names)
 
-            for expected_path in resources.files(
+            for expected_path in resources_files(
                 f"tests.examples.{directory_name}"
             ).iterdir():
                 if expected_path.name == input_file_name:
