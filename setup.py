@@ -30,6 +30,7 @@ setuptools.setup(
             "pep8-naming",
             "mypy",
             "importlib_resources; python_version<'3.10'",
+            "Faker",
         ]
     },
     entry_points={

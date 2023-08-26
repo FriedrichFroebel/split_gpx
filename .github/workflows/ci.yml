@@ -36,6 +36,5 @@ jobs:
         run:
           black --check --diff .
       - name: mypy
-        run: |
-          pip install Faker
+        run:
           mypy split_gpx/ tests/ scripts/
