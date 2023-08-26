@@ -1,7 +1,4 @@
-try:
-    from importlib.resources import as_file, files as resources_files
-except ImportError:
-    from importlib_resources import as_file, files as resources_files
+import sys
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest import TestCase
@@ -12,6 +9,14 @@ from split_gpx.split_gpx import (
     get_name_template,
     split_gpx,
 )
+
+if sys.version_info < (3, 10):
+    # Python 3.9 will raise
+    #   TypeError: expected str, bytes or os.PathLike object, not NoneType
+    # for `importlib.resources.files` for some reasons.
+    from importlib_resources import as_file, files as resources_files
+else:
+    from importlib.resources import as_file, files as resources_files
 
 
 class GetDigitsTestCase(TestCase):
