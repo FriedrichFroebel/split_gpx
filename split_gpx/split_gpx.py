@@ -1,23 +1,24 @@
 from __future__ import annotations
 
+from math import log10
 from pathlib import Path
 
 import gpxpy
 import gpxpy.gpx
 
 
-def get_int_length(value: int) -> int:
-    return value // 10 + 1
+def get_digits(value: int) -> int:
+    return int(log10(value)) + 1
 
 
 def get_filename_template(source_path: Path, segment_count: int) -> str:
-    width = get_int_length(segment_count)
+    width = get_digits(segment_count)
     return f"{source_path.stem}_{{index:0{width}d}}{source_path.suffix}"
 
 
 def get_name_template(original_name: str | None, segment_count: int) -> str:
     original_name = original_name or "(empty)"
-    width = get_int_length(segment_count)
+    width = get_digits(segment_count)
     return f"{{index:0{width}d}} - {original_name}"
 
 

@@ -15,7 +15,10 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     author="FriedrichFröbel",
     url="https://github.com/FriedrichFroebel/split_gpx",
-    packages=setuptools.find_packages(),
+    packages=setuptools.find_packages(
+        where='.',
+        exclude=['tests', 'tests.*', 'scripts', 'scripts.*']
+    ),
     include_package_data=True,
     python_requires=">=3.8, <4",
     install_requires=[
