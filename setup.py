@@ -16,8 +16,7 @@ setuptools.setup(
     author="FriedrichFröbel",
     url="https://github.com/FriedrichFroebel/split_gpx",
     packages=setuptools.find_packages(
-        where='.',
-        exclude=['tests', 'tests.*', 'scripts', 'scripts.*']
+        where=".", exclude=["tests", "tests.*", "scripts", "scripts.*"]
     ),
     include_package_data=True,
     python_requires=">=3.8, <4",
@@ -30,7 +29,7 @@ setuptools.setup(
             "flake8",
             "pep8-naming",
             "mypy",
-            "importlib_resources; python_version<'3.9'",
+            "importlib_resources; python_version<'3.10'",
         ]
     },
     entry_points={
