@@ -2,9 +2,10 @@ from __future__ import annotations
 
 from math import log10
 from pathlib import Path
+from typing import Generator
 
-import gpxpy
-import gpxpy.gpx
+from gpxpy import parse as parse_gpx
+from gpxpy.gpx import GPX, GPXTrack, GPXTrackSegment
 
 
 def get_digits(value: int) -> int:
@@ -22,31 +23,71 @@ def get_name_template(original_name: str | None, segment_count: int) -> str:
     return f"{{index:0{width}d}} - {original_name}"
 
 
+class SplitGpx:
+    def __init__(self):
+        self.output_segments: list[GPXTrackSegment] = []
+        self.output_segment: GPXTrackSegment = GPXTrackSegment()
+        self.track_names: list[str | None] = []
+
+    def add_segment(self, track: GPXTrack | None):
+        self.output_segments.append(self.output_segment)
+        self.output_segment = GPXTrackSegment()
+        self.track_names.append(track.name if track else None)
+
+    def get_segment_length(self) -> int:
+        return len(self.output_segment.points)
+
+    def generate_segments(self, gpx: GPX, max_segment_points: int):
+        previous_track: GPXTrack | None = None
+        for track in gpx.tracks:
+            if self.get_segment_length() > 0:
+                self.add_segment(track=previous_track)
+
+            for segment in track.segments:
+                if self.get_segment_length() > 0:
+                    self.add_segment(track=track)
+                for point in segment.points:
+                    self.output_segment.points.append(point)
+
+                    if self.get_segment_length() >= max_segment_points:
+                        self.add_segment(track=track)
+                        # Make sure to the segments are connected.
+                        self.output_segment.points.append(point)
+            previous_track = track
+        if self.get_segment_length() > 0:
+            self.add_segment(track=track)
+
+    @property
+    def segment_count(self) -> int:
+        return len(self.output_segments)
+
+    def get_name_templates(self) -> dict[str | None, str]:
+        return {
+            name: get_name_template(name, self.track_names.count(name))
+            for name in set(self.track_names)
+        }
+
+    def get_enumerated_segments(
+        self,
+    ) -> Generator[tuple[int, GPXTrackSegment, str | None], None, None]:
+        for index, segment in enumerate(self.output_segments):
+            yield index + 1, segment, self.track_names[index]
+
+
 def split_gpx(source_path: Path, target_directory: Path, max_segment_points: int = 500):
-    gpx = gpxpy.parse(source_path.read_text())
+    gpx = parse_gpx(source_path.read_text())
 
-    output_segment = gpxpy.gpx.GPXTrackSegment()
-    output_segments = [output_segment]
-
-    for track in gpx.tracks:
-        for segment in track.segments:
-            for point in segment.points:
-                output_segment.points.append(point)
-
-                if len(output_segment.points) >= max_segment_points:
-                    output_segment = gpxpy.gpx.GPXTrackSegment()
-                    output_segments.append(output_segment)
-                    # Make sure to the segments are connected.
-                    output_segment.points.append(point)
-
-    segment_count = len(output_segments)
-    output_template = get_filename_template(source_path, segment_count)
-    name_template = get_name_template(gpx.name, segment_count)
-    for index, segment in enumerate(output_segments, start=1):
-        new_name = name_template.format(index=index)
-        output_gpx = gpxpy.gpx.GPX()
+    splitter = SplitGpx()
+    splitter.generate_segments(gpx=gpx, max_segment_points=max_segment_points)
+    output_template = get_filename_template(source_path, splitter.segment_count)
+    name_templates = splitter.get_name_templates()
+    name_counts = {name: 1 for name in set(splitter.track_names)}
+    for index, segment, old_name in splitter.get_enumerated_segments():
+        new_name = name_templates[old_name].format(index=name_counts[old_name])
+        name_counts[old_name] += 1
+        output_gpx = GPX()
         output_gpx.name = new_name
-        gpx_track = gpxpy.gpx.GPXTrack(name=new_name)
+        gpx_track = GPXTrack(name=new_name)
         output_gpx.tracks.append(gpx_track)
         gpx_track.segments.append(segment)
 
