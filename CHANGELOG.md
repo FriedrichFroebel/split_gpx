@@ -1,5 +1,7 @@
 # Development version
 
+# Version 0.1.1 - 2023-09-03
+
 * Add unit tests.
 * Fix digit counting.
 
