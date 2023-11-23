@@ -1,10 +1,10 @@
 from argparse import ArgumentParser
 from pathlib import Path
 
-from split_gpx import split_gpx
+from split_gpx.split_gpx import split_gpx
 
 
-def main():
+def main() -> None:
     parser = ArgumentParser(description="Split GPX track")
     parser.add_argument("source_path", type=str, help="The GPX file to split.")
     parser.add_argument(

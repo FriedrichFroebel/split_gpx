@@ -20,19 +20,19 @@ else:
 
 
 class GetDigitsTestCase(TestCase):
-    def test_one_digit(self):
+    def test_one_digit(self) -> None:
         self.assertEqual(1, get_digits(5))
 
-    def test_two_digits(self):
+    def test_two_digits(self) -> None:
         self.assertEqual(2, get_digits(10))
         self.assertEqual(2, get_digits(99))
 
-    def test_more_digits(self):
+    def test_more_digits(self) -> None:
         self.assertEqual(101, get_digits(10**100 + 1))
 
 
 class GetFilenameTemplateTestCase(TestCase):
-    def test_get_filename_template(self):
+    def test_get_filename_template(self) -> None:
         self.assertEqual(
             "my_track_file_{index:02d}.gpx",
             get_filename_template(
@@ -43,13 +43,13 @@ class GetFilenameTemplateTestCase(TestCase):
 
 
 class GetNameTemplateTestCase(TestCase):
-    def test_name(self):
+    def test_name(self) -> None:
         self.assertEqual(
             "{index:02d} - My track",
             get_name_template(original_name="My track", segment_count=20),
         )
 
-    def test_no_name(self):
+    def test_no_name(self) -> None:
         self.assertEqual(
             "{index:02d} - (empty)",
             get_name_template(original_name=None, segment_count=20),
@@ -59,7 +59,7 @@ class GetNameTemplateTestCase(TestCase):
 class SplitGpxTestCase(TestCase):
     def _run_test(
         self, directory_name: str, input_file_name: str, max_segment_points: int
-    ):
+    ) -> None:
         input_file = (
             resources_files(f"tests.examples.{directory_name}") / input_file_name
         )
@@ -92,7 +92,7 @@ class SplitGpxTestCase(TestCase):
                     expected_path.name,
                 )
 
-    def test_basic(self):
+    def test_basic(self) -> None:
         self._run_test(
             directory_name="basic",
             input_file_name="my_track.gpx",

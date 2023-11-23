@@ -24,12 +24,12 @@ def get_name_template(original_name: str | None, segment_count: int) -> str:
 
 
 class SplitGpx:
-    def __init__(self):
+    def __init__(self) -> None:
         self.output_segments: list[GPXTrackSegment] = []
         self.output_segment: GPXTrackSegment = GPXTrackSegment()
         self.track_names: list[str | None] = []
 
-    def add_segment(self, track: GPXTrack | None):
+    def add_segment(self, track: GPXTrack | None) -> None:
         self.output_segments.append(self.output_segment)
         self.output_segment = GPXTrackSegment()
         self.track_names.append(track.name if track else None)
@@ -37,7 +37,7 @@ class SplitGpx:
     def get_segment_length(self) -> int:
         return len(self.output_segment.points)
 
-    def generate_segments(self, gpx: GPX, max_segment_points: int):
+    def generate_segments(self, gpx: GPX, max_segment_points: int) -> None:
         previous_track: GPXTrack | None = None
         for track in gpx.tracks:
             if self.get_segment_length() > 0:
@@ -74,7 +74,9 @@ class SplitGpx:
             yield index + 1, segment, self.track_names[index]
 
 
-def split_gpx(source_path: Path, target_directory: Path, max_segment_points: int = 500):
+def split_gpx(
+    source_path: Path, target_directory: Path, max_segment_points: int = 500
+) -> None:
     gpx = parse_gpx(source_path.read_text())
 
     splitter = SplitGpx()

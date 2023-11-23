@@ -1,1 +1,2 @@
 include split_gpx/py.typed
+recursive-include tests/examples *

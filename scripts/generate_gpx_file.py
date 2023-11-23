@@ -7,7 +7,7 @@ from gpxpy.gpx import GPX, GPXTrack, GPXTrackSegment, GPXTrackPoint
 TARGET_DIRECTORY = Path(__file__).parent.parent / "tests" / "examples"
 
 
-def main():
+def main() -> None:
     fake = Faker()
 
     gpx = GPX()
