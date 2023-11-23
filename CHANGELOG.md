@@ -1,5 +1,7 @@
 # Development version
 
+# Version 0.2.0 - 2023-11-23
+
 * Fix handling of multiple tracks per file.
 
 # Version 0.1.1 - 2023-09-03

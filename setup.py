@@ -9,7 +9,7 @@ ROOT_DIRECTORY = Path(__file__).parent.resolve()
 setuptools.setup(
     name="split_gpx",
     description="Split a GPX tracks into multiple parts",
-    version="0.1.1",
+    version="0.2.0",
     license="MIT",
     long_description=Path(ROOT_DIRECTORY / "README.md").read_text(encoding="UTF-8"),
     long_description_content_type="text/markdown",
