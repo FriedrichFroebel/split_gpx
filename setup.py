@@ -28,6 +28,7 @@ setuptools.setup(
             "black",
             "flake8",
             "pep8-naming",
+            "flake8-bugbear",
             "mypy",
             "importlib_resources; python_version<'3.10'",
             "Faker",
