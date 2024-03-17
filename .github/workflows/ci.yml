@@ -38,3 +38,6 @@ jobs:
       - name: mypy
         run:
           mypy --strict split_gpx/ tests/ scripts/
+      - name: spelling
+        run:
+          codespell * .github/

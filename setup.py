@@ -26,6 +26,7 @@ setuptools.setup(
     extras_require={
         "dev": [
             "black",
+            "codespell",
             "flake8",
             "pep8-naming",
             "flake8-bugbear",
