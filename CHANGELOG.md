@@ -1,5 +1,7 @@
 # Development version
 
+* Migrate to `pyproject.toml`.
+
 # Version 0.2.0 - 2023-11-23
 
 * Fix handling of multiple tracks per file.

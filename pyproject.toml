@@ -1,0 +1,68 @@
+[build-system]
+requires = [
+    "setuptools",
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "split-gpx"
+description = "Split a GPX tracks into multiple parts"
+version = "0.2.0"
+license = {text = "MIT"}
+readme = {file = "README.md", content-type = "text/markdown"}
+authors = [
+    {name = "FriedrichFröbel"},
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Scientific/Engineering :: GIS",
+    "Topic :: Utilities",
+    "Typing :: Typed",
+]
+keywords = [
+    "gps",
+    "gpx",
+    "track",
+]
+requires-python = ">=3.8, <4"
+dependencies = [
+    "gpxpy",
+]
+
+[project.scripts]
+split_gpx = "split_gpx.__main__:main"
+
+[project.urls]
+Homepage = "https://github.com/FriedrichFroebel/split_gpx"
+Repository = "https://github.com/FriedrichFroebel/split_gpx"
+Issues = "https://github.com/FriedrichFroebel/split_gpx/issues"
+Changelog = "https://github.com/FriedrichFroebel/split_gpx/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "codespell",
+    "flake8",
+    "pep8-naming",
+    "flake8-bugbear",
+    "mypy",
+    "importlib_resources; python_version < '3.10'",
+    "Faker",
+]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = [
+    "split_gpx",
+    "split_gpx.*",
+]
+namespaces = false
