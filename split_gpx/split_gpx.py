@@ -89,6 +89,8 @@ def split_gpx(
         name_counts[old_name] += 1
         output_gpx = GPX()
         output_gpx.name = new_name
+        output_gpx.nsmap = gpx.nsmap
+        output_gpx.schema_locations = gpx.schema_locations
         gpx_track = GPXTrack(name=new_name)
         output_gpx.tracks.append(gpx_track)
         gpx_track.segments.append(segment)
