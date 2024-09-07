@@ -57,6 +57,8 @@ class GetNameTemplateTestCase(TestCase):
 
 
 class SplitGpxTestCase(TestCase):
+    maxDiff = None
+
     def _run_test(
         self, directory_name: str, input_file_name: str, max_segment_points: int
     ) -> None:
@@ -87,14 +89,21 @@ class SplitGpxTestCase(TestCase):
                     continue
                 actual_path = output_path / expected_path.name
                 self.assertEqual(
-                    expected_path.read_text(),
-                    actual_path.read_text(),
+                    expected_path.read_text().strip(),
+                    actual_path.read_text().strip(),
                     expected_path.name,
                 )
 
     def test_basic(self) -> None:
         self._run_test(
             directory_name="basic",
+            input_file_name="my_track.gpx",
+            max_segment_points=500,
+        )
+
+    def test_namespace(self) -> None:
+        self._run_test(
+            directory_name="namespace",
             input_file_name="my_track.gpx",
             max_segment_points=500,
         )
