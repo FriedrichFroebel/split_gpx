@@ -1,6 +1,9 @@
 # Development version
 
+# Version 0.2.1 - 2024-09-07
+
 * Migrate to `pyproject.toml`.
+* Fix handling of namespaces.
 
 # Version 0.2.0 - 2023-11-23
 

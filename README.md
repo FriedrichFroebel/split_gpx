@@ -4,7 +4,7 @@ Simple tool to split a GPX file into multiple parts.
 
 ## Features
 
-At the moment, this only supports splitting GPX files after a fixed number of track points.
+At the moment, this only supports splitting GPX files after a fixed number of track points. Everything besides the tracks itself will be discarded.
 
 I mostly wrote this module for myself to make it easier to install it as I commonly need this functionality to successfully send full tracks to my GPS device which only supports 500 points per track.
 
