@@ -38,7 +38,6 @@ jobs:
       - name: mypy
         run:
           mypy --strict split_gpx/ tests/ scripts/
-        if: ${{ matrix.python != '3.14-dev' }}
       - name: spelling
         run:
           codespell * .github/
