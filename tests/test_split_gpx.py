@@ -1,4 +1,5 @@
 import sys
+from importlib.resources import as_file, files as resources_files
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest import TestCase
@@ -9,8 +10,6 @@ from split_gpx.split_gpx import (
     get_name_template,
     split_gpx,
 )
-
-from importlib.resources import as_file, files as resources_files
 
 
 class GetDigitsTestCase(TestCase):
