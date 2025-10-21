@@ -1,6 +1,6 @@
 # Development version
 
-* Drop support for Python 3.8.
+* Drop support for Python <= 3.9.
 
 # Version 0.2.1 - 2024-09-07
 

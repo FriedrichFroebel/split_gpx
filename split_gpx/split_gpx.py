@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from math import log10
 from pathlib import Path
-from typing import Generator
+from collections.abc import Generator
 
 from gpxpy import parse as parse_gpx
 from gpxpy.gpx import GPX, GPXTrack, GPXTrackSegment
@@ -69,7 +69,7 @@ class SplitGpx:
 
     def get_enumerated_segments(
         self,
-    ) -> Generator[tuple[int, GPXTrackSegment, str | None], None, None]:
+    ) -> Generator[tuple[int, GPXTrackSegment, str | None]]:
         for index, segment in enumerate(self.output_segments):
             yield index + 1, segment, self.track_names[index]
 
