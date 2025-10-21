@@ -1,4 +1,3 @@
-import sys
 from importlib.resources import as_file, files as resources_files
 from pathlib import Path
 from tempfile import TemporaryDirectory
