@@ -8,7 +8,7 @@ build-backend = "setuptools.build_meta"
 name = "split-gpx"
 description = "Split a GPX tracks into multiple parts"
 version = "0.2.1"
-license = {text = "MIT"}
+license = "MIT"
 readme = {file = "README.md", content-type = "text/markdown"}
 authors = [
     {name = "FriedrichFröbel"},
@@ -17,7 +17,6 @@ classifiers = [
     "Development Status :: 4 - Beta",
     "Environment :: Console",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
     "Topic :: Scientific/Engineering :: GIS",
