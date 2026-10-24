@@ -28,7 +28,7 @@ keywords = [
     "gpx",
     "track",
 ]
-requires-python = ">=3.10, <4"
+requires-python = ">=3.11, <4"
 dependencies = [
     "gpxpy",
 ]
@@ -50,7 +50,7 @@ dev = [
     "pep8-naming",
     "flake8-bugbear",
     "mypy",
-    "Faker",
+    "faker",
 ]
 
 [tool.setuptools]
